@@ -1,0 +1,82 @@
+# Menu Management Backend
+
+**Project**: Menu management backend   
+**Stack**: Node.js, Express, MongoDB, Mongoose.
+
+---
+
+## 🚀 Project Summary
+
+This project implements a Menu Management backend with three hierarchical entities:
+
+1. **Category** — top-level menus (e.g., Beverages, Snacks)  
+2. **SubCategory** — optional groups inside a Category (e.g., Hot Drinks)  
+3. **Item** — menu items that belong to a SubCategory or directly to a Category
+
+Features:
+- Create / Read / Update for Category, SubCategory, Item
+- Tax inheritance: SubCategory defaults to Category tax; Item defaults to SubCategory → Category
+- `totalAmount` automatically calculated as `baseAmount - discount`
+- Search items by name (case-insensitive)
+- Ready for demo with Postman / cURL
+
+---
+
+## 🔧 Tech Stack
+
+- Node.js + Express
+- MongoDB + Mongoose
+- dotenv, morgan, cors
+- nodemon (dev)
+
+---
+
+## 📁 Repo structure
+```bash
+menu-backend/
+├─ package.json
+├─ .env.example
+├─ index.js
+├─ config/
+│ └─ db.js
+├─ models/
+│ ├─ Category.js
+│ ├─ SubCategory.js
+│ └─ Item.js
+├─ controllers/
+│ ├─ categoryController.js
+│ ├─ subcategoryController.js
+│ └─ itemController.js
+├─ routes/
+│ ├─ categoryRoutes.js
+│ ├─ subcategoryRoutes.js
+│ └─ itemRoutes.js
+├─ utils/
+│ └─ validateObjectId.js
+└─ README.md
+```
+
+## API Endpoints (base: `/api`)
+### Categories
+- POST `/api/categories` — create category
+- GET `/api/categories` — list categories
+- GET `/api/categories/:idOrName` — get category by id or name (includes subcategories & direct items)
+- PUT `/api/categories/:id` — update category
+
+### Subcategories
+- POST `/api/subcategories/category/:categoryId` — create subcategory for category
+- GET `/api/subcategories` — list all subcategories
+- GET `/api/subcategories/category/:categoryId` — list subcategories under category
+- GET `/api/subcategories/:idOrName` — get subcategory by id or name (includes items)
+- PUT `/api/subcategories/:id` — update subcategory
+
+### Items
+- POST `/api/items/category/:categoryId` — create item under category (optional `?subCategoryId=...`)
+- GET `/api/items` — list all items
+- GET `/api/items/category/:categoryId` — list items under category
+- GET `/api/items/subCategory/:subCategoryId` — list items under subcategory
+- GET `/api/items/:idOrName` — get item by id or name
+- PUT `/api/items/id/:id` — update item
+- GET `/api/items/search?q=term` — search items by name
+
+
