@@ -80,3 +80,23 @@ menu-backend/
 - GET `/api/items/search?q=term` — search items by name
 
 
+## ✅ Setup (local)
+
+1. Clone repo:
+   ```bash
+   git clone https://github.com/NarenderDhariwal10/menu_managementBackend
+   cd menu_managementBackend
+   ```
+2. Install Dependencies:
+   ```bash
+   npm install
+   ```
+3. Create .env
+    ```bash
+    PORT=
+    MONGO_URI=
+    ```
+4. Run server:
+   ```bash
+   npm start
+   ```
